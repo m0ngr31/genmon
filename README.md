@@ -6,10 +6,10 @@ This is specifically made for compatibility with ESP32 devices like the [OpenGen
 
 ## Usage Example
 ```sh
-docker run -d
-    -e TZ="America/New_York"
+docker run -d \
+    -e TZ="America/New_York" \
     -p 8000:8000 \
-    -v config_dir:/etc/genmon
+    -v config_dir:/etc/genmon \
     --name genmon \
     m0ngr31/genmon
 ```
