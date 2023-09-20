@@ -1,0 +1,27 @@
+name: Weekly Runner
+
+on:
+  schedule:
+    - cron: '0 0 * * 3'  # every Wednesday at midnight
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v6
+        id: check-versions
+        with:
+          result-encoding: string
+          retries: 3
+          script: |
+            const date = new Date();
+            const name = `weekly-${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(-2) }-${('0' + date.getDate()).slice(-2)}`;
+
+            await github.rest.repos.createRelease({
+              name,
+              owner: 'm0ngr31',
+              repo: 'genmon',
+              tag_name: name,
+              prerelease: false,
+              make_latest: 'true',
+            });
