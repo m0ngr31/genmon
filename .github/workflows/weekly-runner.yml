@@ -2,7 +2,7 @@ name: Weekly Runner
 
 on:
   schedule:
-    - cron: '0 0 * * 3'  # every Wednesday at midnight
+    - cron: '40 * * * *'  # every Wednesday at midnight
 
 jobs:
   docker:
@@ -11,6 +11,7 @@ jobs:
       - uses: actions/github-script@v6
         id: check-versions
         with:
+          github-token: ${{ secrets.PAT }}
           result-encoding: string
           retries: 3
           script: |
