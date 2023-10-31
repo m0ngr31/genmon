@@ -20,9 +20,12 @@ RUN sed -i 's/strlist_json = False/strlist_json = True/g' /app/genmon/conf/genmq
 RUN sed -i 's/flush_interval = 0/flush_interval = 60/g' /app/genmon/conf/genmqtt.conf
 RUN sed -i 's/blacklist = Monitor,Run Time,Monitor Time,Generator Time,External Data/blacklist = Run Time,Monitor Time,Generator Time,Platform Stats,Communication Stats/g' /app/genmon/conf/genmqtt.conf
 
+# Force to use virtualenv
+RUN mkdir -p /usr/lib/python3.11
+RUN echo '' >> /usr/lib/python3.11/EXTERNALLY-MANAGED
+
 # Install Genmon requirements
-RUN /bin/bash /app/genmon/genmonmaint.sh -i -n -p 3 -s
-RUN pip install spidev
+RUN cd /app/genmon && ./genmonmaint.sh -i -n -s
 
 # Configure startup script
 COPY start.sh /app/start.sh
