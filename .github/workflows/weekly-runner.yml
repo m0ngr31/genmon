@@ -2,7 +2,7 @@ name: Weekly Runner
 
 on:
   schedule:
-    - cron: '45 * * * *'  # every Wednesday at midnight
+    - cron: '0 0 * * 3'  # every Wednesday at midnight
 
 jobs:
   docker:
