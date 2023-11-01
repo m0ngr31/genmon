@@ -26,3 +26,9 @@ jobs:
               prerelease: false,
               make_latest: 'true',
             });
+
+            await github.rest.actions.enableWorkflow({
+              owner: 'm0ngr31',
+              repo: 'genmon',
+              workflow_id: 'weekly-runner.yml',
+            });
